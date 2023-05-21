@@ -50,5 +50,8 @@ variable "alarm_description" {
   description = "The description for the alarm."
   default     = "This metric monitors ec2 cpu utilization"
 }
-  
+
+variable "create_sns" {
+  description = "Whether to create an SNS topic for the alarm."
+  default     = "false"
 }
