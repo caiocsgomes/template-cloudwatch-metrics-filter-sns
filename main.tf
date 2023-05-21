@@ -19,3 +19,15 @@ resource "aws_cloudwatch_log_metric_filter" "metric_filter" {
     value     = var.metric_value
   }
 }
+
+resource "aws_cloudwatch_metric_alarm" "metric_alarm" {
+  alarm_name          = var.alarm_name
+  comparison_operator = var.alarm_comparison_operator
+  evaluation_periods  = var.evaluation_periods
+  metric_name         = aws_cloudwatch_log_metric_filter.metric_filter.name
+  namespace           = var.metric_namespace
+  period              = var.alarm_period
+  statistic           = var.alarm_statistic
+  threshold           = var.alarm_threshold
+  alarm_description   = var.alarm_description
+}
