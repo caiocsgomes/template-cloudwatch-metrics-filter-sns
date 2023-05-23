@@ -55,3 +55,8 @@ variable "create_sns" {
   description = "Whether to create an SNS topic for the alarm."
   default     = "false"
 }
+
+variable "email" {
+  description = "The email address to notify when the alarm transitions to the ALARM state."
+  default     = ""
+}

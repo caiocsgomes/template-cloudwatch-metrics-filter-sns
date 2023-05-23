@@ -30,4 +30,17 @@ resource "aws_cloudwatch_metric_alarm" "metric_alarm" {
   statistic           = var.alarm_statistic
   threshold           = var.alarm_threshold
   alarm_description   = var.alarm_description
+  alarm_actions       = var.create_sns ? [aws_sns_topic.sns[0].arn] : []
+}
+
+resource "aws_sns_topic" "sns" {
+  count = var.create_sns ? 1 : 0
+  name  = var.alarm_name
+}
+
+resource "aws_sns_topic_subscription" "sns_subscription" {
+  count     = var.create_sns ? 1 : 0
+  topic_arn = aws_sns_topic.sns[0].arn
+  protocol  = "email"
+  endpoint  = var.email
 }
